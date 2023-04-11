@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import '/screens/tabs_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 
       initialRoute: '/',
 
-      routes: {'/': (context) => const HomeScreen()},
+      routes: {'/': (context) => const TabScreen()},
       //home: const HomeScreen(),
     );
   }
