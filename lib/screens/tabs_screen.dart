@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './diagnosis_screen.dart';
 import './treatment_screen.dart';
 import './home_screen.dart';
+import './drawer_screen.dart';
 //import 'package:flutter/src/widgets/container.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 
@@ -38,8 +39,10 @@ class _TabScreenState extends State<TabScreen> {
         title: Text(_pages[_selectedPageIndex]['title'] as String? ?? ''),
       ),
       body: _pages[_selectedPageIndex]['page'] as Widget?,
-      //bottom nav bar
+      //adding drawer
+      drawer: const DrawerScreen(),
 
+      //bottom nav bar
       bottomNavigationBar: BottomNavigationBar(
           onTap: _selectedPage,
           currentIndex: _selectedPageIndex,
