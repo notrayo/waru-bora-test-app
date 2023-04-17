@@ -3,6 +3,8 @@ import './diagnosis_screen.dart';
 import './treatment_screen.dart';
 import './home_screen.dart';
 import './drawer_screen.dart';
+import './profile_screen.dart';
+import './settings_screen.dart';
 //import 'package:flutter/src/widgets/container.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 
@@ -30,7 +32,28 @@ class _TabScreenState extends State<TabScreen> {
     });
   }
 
-  //syntax for switching pages
+  //syntax for switching pages from drawer
+
+  void _selectScreenFromDrawer(String identifier) {
+    if (identifier == 'Home') {
+      Navigator.of(context).pop();
+      setState(() {
+        _selectedPageIndex = 0;
+      });
+    } else if (identifier == 'Profile') {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const ProfileScreen(),
+      ));
+    } else if (identifier == 'Settings') {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const SettingsScreen(),
+      ));
+    } else {
+      Navigator.of(context).pop();
+    }
+    //set state
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +63,9 @@ class _TabScreenState extends State<TabScreen> {
       ),
       body: _pages[_selectedPageIndex]['page'] as Widget?,
       //adding drawer
-      drawer: const DrawerScreen(),
+      drawer: DrawerScreen(
+        onSelectScreenFromDrawer: _selectScreenFromDrawer,
+      ),
 
       //bottom nav bar
       bottomNavigationBar: BottomNavigationBar(

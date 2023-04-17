@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DrawerScreen extends StatelessWidget {
-  const DrawerScreen({super.key});
+  const DrawerScreen({super.key, required this.onSelectScreenFromDrawer});
+
+  //logic for switching screens
+  final void Function(String identifier) onSelectScreenFromDrawer;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,71 @@ class DrawerScreen extends StatelessWidget {
               ],
             ),
           ),
+          //add content to drawer
+
+          ListTile(
+            leading: const Icon(
+              Icons.home_filled,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              'Home',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              //control state
+
+              //close drawer
+              onSelectScreenFromDrawer('Home');
+            },
+          ),
+
+          ListTile(
+            leading: const Icon(
+              Icons.person_outline,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              'Profile',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              //control state
+              onSelectScreenFromDrawer('Profile');
+
+              //close drawer
+              //Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.settings_outlined,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              'Settings',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              //control state
+              onSelectScreenFromDrawer('Settings');
+
+              //close drawer
+              // Navigator.pop(context);
+            },
+          )
         ],
       ),
     );
