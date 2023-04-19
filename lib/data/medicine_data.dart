@@ -21,7 +21,8 @@ const dummyCategories = [
   )
 ];
 
-
 // data on the medicine
 
-
+const dummyMedicine = [
+  //awa()
+];
