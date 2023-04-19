@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 
 import '../models/disease_category.dart';
-import '../data/categories_data.dart';
+import '../data/medicine_data.dart';
 
 class CategoryItem extends StatelessWidget {
   final DiseaseCategory category;

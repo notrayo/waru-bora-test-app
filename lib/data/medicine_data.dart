@@ -20,3 +20,8 @@ const dummyCategories = [
     color: Color.fromARGB(255, 81, 153, 118),
   )
 ];
+
+
+// data on the medicine
+
+
