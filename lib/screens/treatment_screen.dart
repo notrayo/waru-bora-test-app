@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'madawa_screen.dart';
 //import 'package:flutter/src/widgets/container.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 
@@ -10,6 +11,14 @@ class CategoryItem extends StatelessWidget {
 
   const CategoryItem({Key? key, required this.category}) : super(key: key);
 
+  //category tapping...
+
+  void selectTreatmentType(BuildContext ctx) {
+    Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
+      return const DawaScreen();
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -18,7 +27,7 @@ class CategoryItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () => selectTreatmentType(context),
         borderRadius: BorderRadius.circular(15),
         child: Container(
           height: 120,

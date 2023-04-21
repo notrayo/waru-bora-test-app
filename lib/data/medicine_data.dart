@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/disease_category.dart';
+import '../models/dawa.dart';
 
 const dummyCategories = [
   DiseaseCategory(
@@ -24,5 +25,21 @@ const dummyCategories = [
 // data on the medicine
 
 const dummyMedicine = [
-  //awa()
+  Dawa(
+    id: 'i1',
+    category: ['c1'],
+    title: 'Liquid Copper Fungiside',
+    type: DawaType.fungiside,
+    imageLink: 'assets/liquid copper fungicide.jpg',
+    benefits: [
+      'controls potential diseases',
+      'controls potential fungi : moss and algae'
+    ],
+    howToUse: [
+      'two caps of liquid to be mixed with water',
+      'use hose end sprayer to spray on leaves'
+    ],
+    price: 3000,
+    agroPhoneNumber: 072093735,
+  )
 ];

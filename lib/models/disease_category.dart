@@ -8,3 +8,7 @@ class DiseaseCategory {
   const DiseaseCategory(
       {required this.id, required this.title, required this.color});
 }
+
+
+// class for dawa
+
