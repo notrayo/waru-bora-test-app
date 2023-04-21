@@ -8,14 +8,19 @@ import '../data/medicine_data.dart';
 
 class CategoryItem extends StatelessWidget {
   final DiseaseCategory category;
+  // final DiseaseCategory id;
+  //id from madawa screen
 
-  const CategoryItem({Key? key, required this.category}) : super(key: key);
+  const CategoryItem({
+    Key? key,
+    required this.category,
+  }) : super(key: key);
 
   //category tapping...
 
   void selectTreatmentType(BuildContext ctx) {
     Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
-      return const DawaScreen();
+      return DawaScreen(category.id, category.title);
     }));
   }
 
