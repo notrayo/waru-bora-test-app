@@ -41,5 +41,23 @@ const dummyMedicine = [
     ],
     price: 3000,
     agroPhoneNumber: 072093735,
+  ),
+  Dawa(
+    id: 'i3',
+    category: ['c1', 'c2'],
+    title: 'Achook Insectside',
+    type: DawaType.insecticide,
+    imageLink: 'assets/Achook-100ml-square.png',
+    benefits: [
+      'controls parasitic nematodes',
+      'biogradable'
+          'low toxicity'
+    ],
+    howToUse: [
+      'apply 300ml of achook into 60L of water',
+      'spray daily in 8 hours intervals'
+    ],
+    price: 500,
+    agroPhoneNumber: 072093735,
   )
 ];
