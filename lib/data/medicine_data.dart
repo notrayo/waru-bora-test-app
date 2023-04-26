@@ -59,5 +59,53 @@ const dummyMedicine = [
     ],
     price: 500,
     agroPhoneNumber: 072093735,
-  )
+  ),
+  Dawa(
+    id: 'i2',
+    category: ['c3'],
+    title: 'Nutrivant (Copia Baraka)',
+    type: DawaType.fertelizer,
+    imageLink: 'assets/nutrivant (Copia Baraka) Fertelizer.jpg',
+    benefits: ['increased potato yield', 'improved crop quality'],
+    howToUse: [
+      'apply powder on soil',
+      'apply water until water is passed through'
+    ],
+    price: 3000,
+    agroPhoneNumber: 072093735,
+  ),
+  Dawa(
+    id: 'i4',
+    category: ['c3'],
+    title: 'Asilee Fertelizer',
+    type: DawaType.fertelizer,
+    imageLink: 'assets/asilee.jpeg',
+    benefits: [
+      'increases soil fertility',
+      'builds soil structure and water retention capacity',
+      'increases nutrients in soil'
+    ],
+    howToUse: [
+      'apply 100g per crop after planting',
+      'Once a day',
+      'repeat for 3 weeks'
+    ],
+    price: 6000,
+    agroPhoneNumber: 072093735,
+  ),
+  Dawa(
+    id: 'i5',
+    category: ['c3'],
+    title: 'Organic Earthlee Maure',
+    type: DawaType.fertelizer,
+    imageLink: 'assets/earthlee new.jpeg',
+    benefits: [
+      'enhanced nutrient transfer (phosphates, iron, calcium)',
+      'enhanced soil poration',
+      'increase water retention capacity'
+    ],
+    howToUse: ['apply 1 kg of manure on soil'],
+    price: 10000,
+    agroPhoneNumber: 072093735,
+  ),
 ];

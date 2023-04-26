@@ -61,6 +61,30 @@ class DrawerScreen extends StatelessWidget {
             },
           ),
 
+          //Adding Favourites
+
+          ListTile(
+            leading: const Icon(
+              Icons.star,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              'Favourites',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              //control state
+              onSelectScreenFromDrawer('Favourites');
+
+              //close drawer
+              //Navigator.pop(context);
+            },
+          ),
+
           ListTile(
             leading: const Icon(
               Icons.person_outline,

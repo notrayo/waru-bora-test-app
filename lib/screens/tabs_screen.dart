@@ -5,6 +5,7 @@ import './home_screen.dart';
 import './drawer_screen.dart';
 import './profile_screen.dart';
 import './settings_screen.dart';
+import './favs_screen.dart';
 //import 'package:flutter/src/widgets/container.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 
@@ -40,6 +41,11 @@ class _TabScreenState extends State<TabScreen> {
       setState(() {
         _selectedPageIndex = 0;
       });
+      //favourites...
+    } else if (identifier == 'Favourites') {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const FavsScreen(),
+      ));
     } else if (identifier == 'Profile') {
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const ProfileScreen(),
