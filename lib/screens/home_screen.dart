@@ -12,11 +12,11 @@ class HomeScreen extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('Testing an image ...'),
+          const Text('.... in partnership with ...'),
           const SizedBox(
-            height: 10,
+            height: 25,
           ),
-          Image.asset('assets/Achook-100ml-square.png')
+          Image.asset('assets/cropped-Organix-logo-edit.png')
         ],
       )),
     );

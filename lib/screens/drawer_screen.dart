@@ -65,7 +65,7 @@ class DrawerScreen extends StatelessWidget {
 
           ListTile(
             leading: const Icon(
-              Icons.star,
+              Icons.star_border_purple500,
               size: 30,
               color: Colors.black,
             ),
