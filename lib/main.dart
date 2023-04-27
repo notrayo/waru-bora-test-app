@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '/screens/tabs_screen.dart';
+import '/screens/madawa_screen.dart';
+import 'screens/madawa_details_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +20,10 @@ class MyApp extends StatelessWidget {
 
       initialRoute: '/',
 
-      routes: {'/': (context) => const TabScreen()},
+      routes: {
+        '/': (context) => const TabScreen(),
+        DawaDetailsScreen.routeName: (context) => DawaDetailsScreen()
+      },
       //home: const HomeScreen(),
     );
   }

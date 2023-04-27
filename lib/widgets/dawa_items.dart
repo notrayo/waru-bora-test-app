@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../models/dawa.dart';
 
+import '../screens/madawa_details_screen.dart';
+
 class DawaItem extends StatelessWidget {
   const DawaItem({
     super.key,
@@ -42,9 +44,11 @@ class DawaItem extends StatelessWidget {
     }
   }
 
-  //fow when ontap is activated
+  //for when ontap is activated
 
-  void selectMedicine() {}
+  void selectMedicine(BuildContext context) {
+    Navigator.of(context).pushNamed(DawaDetailsScreen.routeName, arguments: id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +63,7 @@ class DawaItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             color: const Color.fromARGB(255, 235, 234, 234)),
         child: InkWell(
-          onTap: selectMedicine,
+          onTap: () => selectMedicine(context),
           child: Column(
             children: <Widget>[
               Stack(
