@@ -66,35 +66,73 @@ class CategoryItem extends StatelessWidget {
   }
 }
 
-class TreatmentScreen extends StatelessWidget {
+class TreatmentScreen extends StatefulWidget {
   const TreatmentScreen({super.key});
 
   @override
+  State<TreatmentScreen> createState() => _TreatmentScreenState();
+}
+
+class _TreatmentScreenState extends State<TreatmentScreen>
+    with SingleTickerProviderStateMixin {
+  //add animation
+
+  late AnimationController _animationController;
+
+  @override
+// init state
+
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: 900),
+        lowerBound: 0,
+        upperBound: 1);
+
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.all(12),
-            child: Text(
-              'Please pick the diagnosis you got of the potato plant so as to view viable medication:',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
+    return AnimatedBuilder(
+        animation: _animationController,
+        child: Scaffold(
+          body: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(12),
+                child: Text(
+                  'Please pick the diagnosis you got of the potato plant so as to view viable medication:',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
               ),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: dummyCategories.length,
-              itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.all(15),
-                child: CategoryItem(category: dummyCategories[index]),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: dummyCategories.length,
+                  itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: CategoryItem(category: dummyCategories[index]),
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
-    );
+        ),
+        builder: (context, child) => Padding(
+              padding:
+                  EdgeInsets.only(top: 100 - _animationController.value * 100),
+              child: child,
+            ));
   }
 }

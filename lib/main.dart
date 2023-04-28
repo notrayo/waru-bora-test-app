@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '/screens/tabs_screen.dart';
-import '/screens/madawa_screen.dart';
+//import '/screens/madawa_screen.dart';
 import 'screens/madawa_details_screen.dart';
+import './data/medicine_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,6 +10,10 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  //favourites feature
+
+  //List<Dawa> _favouriteMedicine = [];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class MyApp extends StatelessWidget {
 
       routes: {
         '/': (context) => const TabScreen(),
-        DawaDetailsScreen.routeName: (context) => DawaDetailsScreen()
+        DawaDetailsScreen.routeName: (context) => const DawaDetailsScreen()
       },
       //home: const HomeScreen(),
     );
