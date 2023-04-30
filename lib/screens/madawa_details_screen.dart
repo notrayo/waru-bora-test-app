@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:waru_bora_test/data/medicine_data.dart';
+import '../screens/cart.dart';
 
 class DawaDetailsScreen extends StatelessWidget {
   static const routeName = '/dawa-detail';
@@ -21,6 +22,18 @@ class DawaDetailsScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(selectedMedicine.title),
+          //cart icon
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CartPage(),
+                      ));
+                },
+                icon: const Icon(Icons.shopping_cart_outlined))
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(

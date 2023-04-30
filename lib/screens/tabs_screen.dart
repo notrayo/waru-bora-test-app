@@ -6,6 +6,8 @@ import './drawer_screen.dart';
 import './profile_screen.dart';
 import './settings_screen.dart';
 import './favs_screen.dart';
+import './cart.dart';
+
 //import 'package:flutter/src/widgets/container.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 
@@ -45,6 +47,12 @@ class _TabScreenState extends State<TabScreen> {
     } else if (identifier == 'Favourites') {
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const FavsScreen(),
+      ));
+
+      //Cart
+    } else if (identifier == 'Cart') {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const CartPage(),
       ));
     } else if (identifier == 'Profile') {
       Navigator.of(context).push(MaterialPageRoute(
