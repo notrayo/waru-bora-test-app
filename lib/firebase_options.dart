@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '746522585271',
     projectId: 'waru-bora-test',
     storageBucket: 'waru-bora-test.appspot.com',
-    iosClientId: '746522585271-eugj6bflekgtmlenag0ogq9es43vc7hf.apps.googleusercontent.com',
+    iosClientId:
+        '746522585271-eugj6bflekgtmlenag0ogq9es43vc7hf.apps.googleusercontent.com',
     iosBundleId: 'com.example.waruBoraTest',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '746522585271',
     projectId: 'waru-bora-test',
     storageBucket: 'waru-bora-test.appspot.com',
-    iosClientId: '746522585271-eugj6bflekgtmlenag0ogq9es43vc7hf.apps.googleusercontent.com',
+    iosClientId:
+        '746522585271-eugj6bflekgtmlenag0ogq9es43vc7hf.apps.googleusercontent.com',
     iosBundleId: 'com.example.waruBoraTest',
   );
 }

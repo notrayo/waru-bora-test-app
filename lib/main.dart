@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waru_bora_test/screens/login_screen.dart';
 import '/screens/tabs_screen.dart';
 //import '/screens/madawa_screen.dart';
 import 'screens/madawa_details_screen.dart';
@@ -19,7 +20,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   //favourites feature
 
@@ -33,9 +34,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.brown,
       ),
 
-      initialRoute: '/',
+      initialRoute: '/login',
 
       routes: {
+        '/login': (context) => const LogInScreen(),
         '/': (context) => const TabScreen(),
         DawaDetailsScreen.routeName: (context) => const DawaDetailsScreen()
       },

@@ -149,7 +149,29 @@ class DrawerScreen extends StatelessWidget {
               //close drawer
               // Navigator.pop(context);
             },
-          )
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.logout,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              'Logout',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              // Perform logout action here
+              // Navigate back to login screen
+              Navigator.pushReplacementNamed(context, '/login');
+            },
+          ),
         ],
       ),
     );
