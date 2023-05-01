@@ -4,7 +4,17 @@ import '/screens/tabs_screen.dart';
 import 'screens/madawa_details_screen.dart';
 import './data/medicine_data.dart';
 
-void main() {
+//firebase
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 

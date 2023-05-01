@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "746522585271",
+    "project_id": "waru-bora-test",
+    "storage_bucket": "waru-bora-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746522585271:android:cc7b6aa152ea931f3a8532",
+        "android_client_info": {
+          "package_name": "com.example.waru_bora_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746522585271-8sn6ksq24mh7eknta5b54kt5kv1rl8co.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCO-KPXxI7OqLcis8CNAhME7BoRMz40HY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746522585271-8sn6ksq24mh7eknta5b54kt5kv1rl8co.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

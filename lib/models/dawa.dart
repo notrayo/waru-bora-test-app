@@ -27,3 +27,19 @@ class Dawa {
       required this.price,
       required this.agroPhoneNumber});
 }
+
+//favourites..
+
+class FavoriteItem {
+  final String id;
+  final String title;
+  final String imageLink;
+  final int price;
+
+  const FavoriteItem({
+    required this.id,
+    required this.title,
+    required this.imageLink,
+    required this.price,
+  });
+}
