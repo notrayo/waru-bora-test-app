@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../models/dawa.dart';
 
 import '../screens/madawa_details_screen.dart';
-import '../screens/favs_screen.dart';
+//import '../screens/favs_screen.dart';
 
 class DawaItem extends StatelessWidget {
   const DawaItem({

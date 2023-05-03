@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'signup_screen.dart';
+import 'dart:async';
+
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({Key? key}) : super(key: key);
@@ -9,6 +12,45 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  static Future<User?> loginUsingEmailPassword(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-not-found" || e.code == 'wrong-password') {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Invalid email or password'),
+                content: const Text('Please enter a valid email and password'),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            });
+        throw Exception('Incorrect email or password');
+      } else {
+        rethrow;
+      }
+    }
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +69,7 @@ class _LogInScreenState extends State<LogInScreen> {
           child: Center(
         child: Padding(
           padding: EdgeInsets.fromLTRB(
-              20, MediaQuery.of(context).size.height * 0.2, 20, 0),
+              20, MediaQuery.of(context).size.height * 0.1, 20, 0),
           child: Column(
             children: <Widget>[
               const Text(
@@ -38,13 +80,14 @@ class _LogInScreenState extends State<LogInScreen> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 30,
               ),
               logoImage('assets/nature-leaf-logo.png'),
               const SizedBox(
                 height: 50,
               ),
               TextField(
+                controller: _emailController,
                 decoration: InputDecoration(
                   hintText: 'Enter your email : ',
                   prefixIcon: const Icon(Icons.email),
@@ -56,8 +99,9 @@ class _LogInScreenState extends State<LogInScreen> {
                   hintStyle: const TextStyle(color: Colors.black),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 35),
               TextField(
+                controller: _passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                     hintText: 'Enter Password',
@@ -67,10 +111,39 @@ class _LogInScreenState extends State<LogInScreen> {
                     ),
                     hintStyle: const TextStyle(color: Colors.black)),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 60),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/');
+                onPressed: () async {
+                  try {
+                    User? user = await loginUsingEmailPassword(
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                        context: context);
+                    print(user);
+                    if (user != null) {
+                      Navigator.pushNamed(context, '/');
+                      //new screen (home screen)
+                    }
+                  } catch (e) {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Invalid email or password'),
+                            content: const Text(
+                                'Please enter a valid email AND / OR password'),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        });
+                    print(e);
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -84,7 +157,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 child: const Text('Login'),
               ),
               const SizedBox(
-                height: 20,
+                height: 30,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
