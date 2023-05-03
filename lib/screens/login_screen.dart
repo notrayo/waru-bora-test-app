@@ -32,7 +32,8 @@ class _LogInScreenState extends State<LogInScreen> {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: const Text('Invalid email or password'),
-                content: const Text('Please enter a valid email and password'),
+                content:
+                    const Text('Please enter a valid email AND / OR password'),
                 actions: <Widget>[
                   TextButton(
                     child: const Text('OK'),
