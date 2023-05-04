@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({super.key, required this.onSelectScreenFromDrawer});
 
@@ -166,10 +168,13 @@ class DrawerScreen extends StatelessWidget {
                   .titleMedium!
                   .copyWith(color: Colors.black),
             ),
-            onTap: () {
+            onTap: () async {
               // Perform logout action here
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.clear();
               // Navigate back to login screen
-              Navigator.pushReplacementNamed(context, '/login');
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/login', ((route) => false));
             },
           ),
         ],
