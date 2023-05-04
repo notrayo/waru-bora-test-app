@@ -87,30 +87,57 @@ class _LogInScreenState extends State<LogInScreen> {
               const SizedBox(
                 height: 50,
               ),
-              TextField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  hintText: 'Enter your email : ',
-                  prefixIcon: const Icon(Icons.email),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(255, 2, 63, 113)),
-                  ),
-                  hintStyle: const TextStyle(color: Colors.black),
-                ),
-              ),
-              const SizedBox(height: 35),
-              TextField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                    hintText: 'Enter Password',
-                    prefixIcon: const Icon(Icons.lock),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
+              Form(
+                autovalidateMode: AutovalidateMode.always,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        hintText: 'Enter your email : ',
+                        prefixIcon: const Icon(Icons.email),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 2, 63, 113),
+                          ),
+                        ),
+                        hintStyle: const TextStyle(color: Colors.black),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email';
+                        }
+                        if (!value.contains('@')) {
+                          return 'Please enter a valid email';
+                        }
+                        return null;
+                      },
                     ),
-                    hintStyle: const TextStyle(color: Colors.black)),
+                    const SizedBox(height: 35),
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: 'Enter Password',
+                        prefixIcon: const Icon(Icons.lock),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        hintStyle: const TextStyle(color: Colors.black),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a password';
+                        }
+                        if (value.length < 6) {
+                          return 'Password must be at least 6 characters';
+                        }
+                        return null;
+                      },
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 60),
               ElevatedButton(
