@@ -12,6 +12,8 @@ import 'package:http/http.dart' as http;
 
 import 'package:url_launcher/url_launcher.dart';
 
+import 'package:mime_type/mime_type.dart';
+
 class DiagnosisScreen extends StatefulWidget {
   const DiagnosisScreen({super.key});
 
@@ -27,7 +29,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
   File? _imageFile;
 
   //new string file
-  String? _predictionResult;
+  // String? _predictionResult;
 
   Future<void> _getImage(ImageSource source) async {
     final pickedFile = await ImagePicker().pickImage(source: source);
@@ -40,45 +42,6 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
 
   // Communicating with Flask Backend
 
-  // Future<void> _predictImage() async {
-  //   final uri = Uri.parse('https://011d-41-89-64-52.ngrok-free.app');
-  //   final request = http.MultipartRequest('POST', uri);
-  //   request.files
-  //       .add(await http.MultipartFile.fromPath('image', _imageFile!.path));
-
-  //   try {
-  //     final response = await request.send();
-  //     final responseJson = jsonDecode(await response.stream.bytesToString());
-  //     setState(() {
-  //       _predictionResult = responseJson['prediction'];
-  //     });
-  //     _showResultPopup();
-  //   } catch (e) {
-  //     print(e);
-  //     // Show error message to the user
-  //   }
-  // }
-
-  //result popup
-
-  // void _showResultPopup() {
-  //   showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) {
-  //         return AlertDialog(
-  //           title: const Text('Diagnosis Result'),
-  //           content: Text(_predictionResult ?? ''),
-  //           actions: [
-  //             ElevatedButton(
-  //                 onPressed: () {
-  //                   Navigator.of(context).pop();
-  //                 },
-  //                 child: const Text('OK'))
-  //           ],
-  //         );
-  //       });
-  // }
-
   // Taking user to Flask app functionality
 
   final Uri _url = Uri.parse('https://961e-41-90-177-61.ngrok-free.app');
@@ -87,6 +50,30 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
     if (!await launchUrl(_url)) {
       throw Exception('Could not launch $_url');
     }
+  }
+
+  // Uploading Image file to Flask Server
+
+  String? message = "";
+
+  uploadImage() async {
+    final request = http.MultipartRequest(
+        'POST', Uri.parse('https://961e-41-90-177-61.ngrok-free.app/'));
+
+    final headers = {'Content-type': 'multipart/form-data'};
+
+    request.files.add(http.MultipartFile(
+        'image', _imageFile!.readAsBytes().asStream(), _imageFile!.lengthSync(),
+        filename: _imageFile!.path.split('/').last));
+
+    request.headers.addAll(headers);
+    request.send();
+
+    final response = await request.send();
+    http.Response res = await http.Response.fromStream(response);
+    final resJson = jsonDecode(res.body);
+    message = resJson['message'];
+    setState(() {});
   }
 
   @override
@@ -178,7 +165,9 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
             ),
             //prediction button
             ElevatedButton(
-                onPressed: (() {}),
+                onPressed:
+                    //uploadImage,
+                    uploadImage,
                 style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.blueAccent),
