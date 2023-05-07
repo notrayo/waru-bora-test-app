@@ -14,6 +14,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:mime_type/mime_type.dart';
 
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+
 class DiagnosisScreen extends StatefulWidget {
   const DiagnosisScreen({super.key});
 
@@ -37,6 +39,55 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
       setState(() {
         _imageFile = File(pickedFile.path);
       });
+    }
+  }
+
+  void _saveImageToGallery() async {
+    try {
+      final result = await ImageGallerySaver.saveFile(_imageFile!.path);
+      if (result['isSuccess']) {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: const Text('Success'),
+            content: const Text('Image saved to gallery!'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: const Text('Error'),
+            content: const Text('Failed to save image to gallery!'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('Error'),
+          content: Text('Error saving image to gallery: $e'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
     }
   }
 
@@ -85,6 +136,46 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(
+              height: 25,
+            ),
+            const Text(
+              'Disclaimer: ',
+              style: TextStyle(
+                fontSize: 21,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 69, 69, 69),
+              ),
+            ),
+            ListTileTheme(
+                dense: true,
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                child: Column(
+                  children: const [
+                    ListTile(
+                      leading: Icon(Icons.warning_amber),
+                      title: Text(
+                          'Due to dependancy issues, youll have to visit our website to interact with our AI model'),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.warning_amber),
+                      title: Text(
+                          'The prediction, despite having a 96% accuracy, is based on a machine learning algorithm and is not 100% accurate. Please consult Organix Limited for proper treatment.'),
+                    )
+                  ],
+                )),
+            const SizedBox(
+              height: 20,
+            ),
+            Divider(
+              height: 1,
+              thickness: 1,
+              color: Colors.grey[300],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               children: const [
                 Text(
@@ -151,7 +242,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
             Row(
               children: const [
                 Text(
-                  '2. Upload taken photo to the server',
+                  '2. Upload taken photo to gallery',
                   style: TextStyle(
                       fontSize: 22,
                       fontStyle: FontStyle.italic,
@@ -167,11 +258,11 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
             ElevatedButton(
                 onPressed:
                     //uploadImage,
-                    uploadImage,
+                    _saveImageToGallery,
                 style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: Colors.blueAccent),
-                child: const Text('UPLOAD TO SERVER')),
+                    backgroundColor: const Color.fromARGB(255, 64, 204, 26)),
+                child: const Text('UPLOAD IMAGE TO GALLERY')),
             const SizedBox(
               height: 20,
             ),
@@ -204,6 +295,9 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                     foregroundColor: Colors.redAccent,
                     backgroundColor: const Color.fromARGB(255, 239, 234, 234)),
                 child: const Text('VISIT SERVER 2 PREDICT')),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
