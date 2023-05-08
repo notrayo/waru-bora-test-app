@@ -31,7 +31,7 @@ class Dawa {
       required this.agroPhoneNumber,
       this.isStarred = false});
 
-  bool get getIsStarred => this.isStarred;
+  bool get getIsStarred => isStarred;
 
   //bool get isStarred => this.isStarred;
 }
