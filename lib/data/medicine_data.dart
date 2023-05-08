@@ -24,7 +24,7 @@ const dummyCategories = [
 
 // data on the medicine
 
-const dummyMedicine = [
+List<Dawa> dummyMedicine = [
   Dawa(
     id: 'i1',
     category: ['c1'],

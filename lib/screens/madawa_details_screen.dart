@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:waru_bora_test/data/medicine_data.dart';
 import '../screens/cart.dart';
+import 'package:favorite_button/favorite_button.dart';
+import '../models/dawa.dart';
 
-class DawaDetailsScreen extends StatelessWidget {
+class DawaDetailsScreen extends StatefulWidget {
   static const routeName = '/dawa-detail';
 
   const DawaDetailsScreen({super.key});
 
+  @override
+  State<DawaDetailsScreen> createState() => _DawaDetailsScreenState();
+}
+
+class _DawaDetailsScreenState extends State<DawaDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final dawaID = ModalRoute.of(context)?.settings.arguments as String;
@@ -22,18 +29,17 @@ class DawaDetailsScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(selectedMedicine.title),
-          //cart icon
           actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CartPage(),
-                      ));
-                },
-                icon: const Icon(Icons.shopping_cart_outlined))
+            StarButton(
+                isStarred: selectedMedicine.isStarred,
+                valueChanged: (isStarred) {
+                  setState(() {
+                    selectedMedicine.isStarred = isStarred;
+                  });
+                  print('Is Favorite $isStarred)');
+                })
           ],
+          //cart icon
         ),
         body: SingleChildScrollView(
           child: Column(

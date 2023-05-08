@@ -67,7 +67,7 @@ class DrawerScreen extends StatelessWidget {
 
           ListTile(
             leading: const Icon(
-              Icons.star_border_purple500,
+              Icons.star,
               size: 30,
               color: Colors.black,
             ),
@@ -88,27 +88,6 @@ class DrawerScreen extends StatelessWidget {
           ),
 
           // Cart Page
-          ListTile(
-            leading: const Icon(
-              Icons.shopping_cart_rounded,
-              size: 30,
-              color: Colors.black,
-            ),
-            title: Text(
-              'Cart',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: Colors.black),
-            ),
-            onTap: () {
-              //control state
-              onSelectScreenFromDrawer('Cart');
-
-              //close drawer
-              //Navigator.pop(context);
-            },
-          ),
 
           ListTile(
             leading: const Icon(

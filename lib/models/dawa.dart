@@ -16,7 +16,10 @@ class Dawa {
   final int agroPhoneNumber;
   // final ... googlemaps url
 
-  const Dawa(
+  //for favourtes
+  bool isStarred;
+
+  Dawa(
       {required this.id,
       required this.category,
       required this.title,
@@ -25,21 +28,12 @@ class Dawa {
       required this.benefits,
       required this.howToUse,
       required this.price,
-      required this.agroPhoneNumber});
+      required this.agroPhoneNumber,
+      this.isStarred = false});
+
+  bool get getIsStarred => this.isStarred;
+
+  //bool get isStarred => this.isStarred;
 }
 
 //favourites..
-
-class FavoriteItem {
-  final String id;
-  final String title;
-  final String imageLink;
-  final int price;
-
-  const FavoriteItem({
-    required this.id,
-    required this.title,
-    required this.imageLink,
-    required this.price,
-  });
-}
