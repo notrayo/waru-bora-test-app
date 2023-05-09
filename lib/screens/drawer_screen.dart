@@ -86,6 +86,27 @@ class DrawerScreen extends StatelessWidget {
               //Navigator.pop(context);
             },
           ),
+          ListTile(
+            leading: const Icon(
+              Icons.public,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              'Maps Location',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              //control state
+              onSelectScreenFromDrawer('Maps Location');
+
+              //close drawer
+              // Navigator.pop(context);
+            },
+          ),
 
           // Cart Page
 
@@ -131,6 +152,7 @@ class DrawerScreen extends StatelessWidget {
               // Navigator.pop(context);
             },
           ),
+
           const SizedBox(
             height: 30,
           ),

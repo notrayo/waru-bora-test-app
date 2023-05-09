@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:flutter/src/widgets/container.dart';
 //import 'package:flutter/src/widgets/framework.dart';
 import 'package:countup/countup.dart';
+import 'package:waru_bora_test/screens/location_maps_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -57,8 +58,8 @@ class HomeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
-                  color: Colors.grey,
-                  width: 1.0,
+                  color: const Color.fromARGB(255, 7, 7, 7),
+                  width: 0.3,
                 ),
               ),
               child: Row(
@@ -100,7 +101,84 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Divider(
+              height: 1,
+              thickness: 0.5,
+              color: Colors.grey[300],
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                Text(
+                  'Locate Us : ',
+                  style: TextStyle(
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 69, 69, 69),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MapsScreen()));
+              },
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 0.5,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Google',
+                          style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        Text(
+                          'Maps',
+                          style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 10.0),
+                    const Icon(
+                      Icons.location_on_sharp,
+                      size: 35,
+                      color: Colors.green,
+                    )
+                  ],
+                ),
+              ),
+            ),
           ],
         )),
       ),

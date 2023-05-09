@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waru_bora_test/screens/location_maps_screen.dart';
 import './diagnosis_screen.dart';
 import './treatment_screen.dart';
 import './home_screen.dart';
@@ -50,9 +51,9 @@ class _TabScreenState extends State<TabScreen> {
       ));
 
       //Cart
-    } else if (identifier == 'Cart') {
+    } else if (identifier == 'Maps Location') {
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const CartPage(),
+        builder: (context) => const MapsScreen(),
       ));
     } else if (identifier == 'Profile') {
       Navigator.of(context).push(MaterialPageRoute(
