@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:waru_bora_test/data/medicine_data.dart';
-import '../screens/cart.dart';
+//import '../screens/cart.dart';
 import 'package:favorite_button/favorite_button.dart';
-import '../models/dawa.dart';
+//import '../models/dawa.dart';
 
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_database/firebase_database.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 
 class DawaDetailsScreen extends StatefulWidget {
   static const routeName = '/dawa-detail';
@@ -31,8 +31,8 @@ class _DawaDetailsScreenState extends State<DawaDetailsScreen> {
 
     //initializing Realtine Firebase Database
 
-    final DatabaseReference databaseReference =
-        FirebaseDatabase.instance.ref().child('favorite_medicines');
+    // final DatabaseReference databaseReference =
+    //  FirebaseDatabase.instance.ref().child('favorite_medicines');
 
     //selectedMedicine.isStarred = true;
 
