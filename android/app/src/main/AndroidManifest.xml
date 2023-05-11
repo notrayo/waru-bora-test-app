@@ -9,6 +9,11 @@
         android:hardwareAccelerated="true"
         android:windowSoftInputMode="adjustResize">
 
+        <!--: Google Maps API key ... -->
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyBcJbr70BChUj5xJqLc2OCXMCBKUhJgq6w"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
