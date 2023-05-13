@@ -19,6 +19,9 @@ class Dawa {
   //for favourtes
   bool isStarred;
 
+  //for cart
+  bool isAddedToCart;
+
   Dawa(
       {required this.id,
       required this.category,
@@ -29,9 +32,11 @@ class Dawa {
       required this.howToUse,
       required this.price,
       required this.agroPhoneNumber,
-      this.isStarred = false});
+      this.isStarred = false,
+      this.isAddedToCart = false});
 
   bool get getIsStarred => isStarred;
+  bool get getisAddedToCart => isAddedToCart;
 
   //bool get isStarred => this.isStarred;
 }

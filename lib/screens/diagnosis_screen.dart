@@ -156,7 +156,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                     ListTile(
                       leading: Icon(Icons.warning_amber),
                       title: Text(
-                          'Due to dependancy issues, youll have to visit our website to interact with our AI model'),
+                          'Due to memory and dependancy issues, youll have to visit our website to interact with our AI model'),
                     ),
                     ListTile(
                       leading: Icon(Icons.warning_amber),

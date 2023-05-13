@@ -5,8 +5,10 @@ import 'package:favorite_button/favorite_button.dart';
 import 'package:waru_bora_test/screens/cart.dart';
 //import '../models/dawa.dart';
 
-//import 'package:firebase_database/firebase_database.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
+import '../providers/cart_state_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart';
+import 'package:riverpod_context/riverpod_context.dart';
 
 class DawaDetailsScreen extends StatefulWidget {
   static const routeName = '/dawa-detail';
@@ -30,26 +32,15 @@ class _DawaDetailsScreenState extends State<DawaDetailsScreen> {
 
     double listViewHeight2 = selectedMedicine.howToUse.length * 60.0 + 10.0;
 
-    //initializing Realtine Firebase Database
+    //riverpod state notifier..
 
-    // final DatabaseReference databaseReference =
-    //  FirebaseDatabase.instance.ref().child('favorite_medicines');
+    //final medicineCartProvider = StateNotifierProvider((ref) => MedicineCart());
 
-    //selectedMedicine.isStarred = true;
+    final medicineCart = MedicineCart();
 
-    //final User? user = FirebaseAuth.instance.currentUser;
-    //final userID = user!.uid;
+    //final medicineCart = context.read(medicineCartProvider);
 
-    // databaseReference.child(userID).child(selectedMedicine.id).set({
-    //   'medicine_id': selectedMedicine.id,
-    //   'title': selectedMedicine.title,
-    //   'imageLink': selectedMedicine.imageLink,
-    //   'price': selectedMedicine.price,
-    //   'category': selectedMedicine.category,
-    //   'type': selectedMedicine.type
-    // });
-
-    //final _scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+    //final medicineCart =
 
     return (Scaffold(
       appBar: AppBar(
@@ -62,10 +53,37 @@ class _DawaDetailsScreenState extends State<DawaDetailsScreen> {
                 MaterialPageRoute(builder: (context) => const CartPage()),
               );
             },
-            icon: const Icon(
-              Icons.shopping_cart,
-              size: 31,
-              //color: Color.fromARGB(255, 6, 59, 8),
+            icon: Stack(
+              children: [
+                const Icon(
+                  Icons.shopping_cart,
+                  size: 31,
+                ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    constraints: const BoxConstraints(
+                      minWidth: 16,
+                      minHeight: 16,
+                    ),
+                    child: Text(
+                      medicineCart.itemCount.toString(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -140,11 +158,30 @@ class _DawaDetailsScreenState extends State<DawaDetailsScreen> {
               height: 35,
             ),
             Center(
-              child: InkWell(
+              child: GestureDetector(
+                onTap: (() {
+                  medicineCart.addItem(selectedMedicine);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Item added to cart"),
+                        actions: <Widget>[
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }),
                 child: Container(
                   width: MediaQuery.of(context).size.width *
                       0.85, // adjust the width to make it smaller
-                  height: MediaQuery.of(context).size.height * 0.07,
+                  height: MediaQuery.of(context).size.height * 0.085,
                   padding: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 12.0),
                   decoration: BoxDecoration(
@@ -172,9 +209,9 @@ class _DawaDetailsScreenState extends State<DawaDetailsScreen> {
                       ),
                       const Icon(
                         Icons.add,
-                        size: 35,
-                        color: Color.fromARGB(255, 3, 115, 50),
-                      )
+                        size: 32,
+                        color: Colors.green,
+                      ),
                     ],
                   ),
                 ),
