@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waru_bora_test/data/medicine_data.dart';
 //import '../screens/cart.dart';
 import 'package:favorite_button/favorite_button.dart';
-import 'package:waru_bora_test/screens/cart.dart';
+import 'package:waru_bora_test/screens/cart_screen.dart';
 import '../models/dawa.dart';
 import '../models/cart.dart';
 
@@ -160,7 +160,7 @@ class _DawaDetailsScreenState extends State<DawaDetailsScreen> {
                 child: GestureDetector(
                   onTap: (() {
                     final cart = Provider.of<Cart>(context, listen: false);
-                    cart.addItem(selectedMedicine.title, selectedMedicine.id,
+                    cart.addItem(selectedMedicine.id, selectedMedicine.title,
                         selectedMedicine.price);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(

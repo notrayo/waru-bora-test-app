@@ -38,10 +38,10 @@ class Cart with ChangeNotifier {
         (previousValue, element) => previousValue + element.quantity,
       );
 
-  void addItem(String productId, String title, int price) {
-    if (_items.containsKey(productId)) {
+  void addItem(String id, String title, int price) {
+    if (_items.containsKey(id)) {
       _items.update(
-        productId,
+        id,
         (existingCartItem) => CartItem(
           id: existingCartItem.id,
           title: existingCartItem.title,
@@ -51,7 +51,7 @@ class Cart with ChangeNotifier {
       );
     } else {
       _items.putIfAbsent(
-        productId,
+        id,
         () => CartItem(
           id: DateTime.now().toString(),
           title: title,
@@ -63,8 +63,8 @@ class Cart with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeItem(String productId) {
-    _items.remove(productId);
+  void removeItem(String id) {
+    _items.remove(id);
     notifyListeners();
   }
 
