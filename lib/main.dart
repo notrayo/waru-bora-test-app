@@ -9,6 +9,9 @@ import 'screens/madawa_details_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+//import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:provider/provider.dart';
+import './models/cart.dart';
 
 //import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,7 +21,8 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => Cart(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
