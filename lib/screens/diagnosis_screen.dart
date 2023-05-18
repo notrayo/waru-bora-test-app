@@ -16,6 +16,8 @@ import 'package:mime_type/mime_type.dart';
 
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 class DiagnosisScreen extends StatefulWidget {
   const DiagnosisScreen({super.key});
 
@@ -42,60 +44,11 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
     }
   }
 
-  void _saveImageToGallery() async {
-    try {
-      final result = await ImageGallerySaver.saveFile(_imageFile!.path);
-      if (result['isSuccess']) {
-        showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-            title: const Text('Success'),
-            content: const Text('Image saved to gallery!'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      } else {
-        showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-            title: const Text('Error'),
-            content: const Text('Failed to save image to gallery!'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('OK'),
-              ),
-            ],
-          ),
-        );
-      }
-    } catch (e) {
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: const Text('Error'),
-          content: Text('Error saving image to gallery: $e'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-    }
-  }
-
   // Communicating with Flask Backend
 
   // Taking user to Flask app functionality
 
-  final Uri _url = Uri.parse('https://961e-41-90-177-61.ngrok-free.app');
+  final Uri _url = Uri.parse('https://087c-41-90-179-242.ngrok-free.app/');
 
   Future<void> _launchUrl() async {
     if (!await launchUrl(_url)) {
@@ -108,23 +61,66 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
   String? message = "";
 
   uploadImage() async {
-    final request = http.MultipartRequest(
-        'POST', Uri.parse('https://961e-41-90-177-61.ngrok-free.app/'));
+    if (_imageFile == null) {
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('Error'),
+          content: const Text('No image selected'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
 
-    final headers = {'Content-type': 'multipart/form-data'};
+    try {
+      final firebase_storage.Reference ref = firebase_storage
+          .FirebaseStorage.instance
+          .ref()
+          .child('images/${DateTime.now().millisecondsSinceEpoch}.png');
 
-    request.files.add(http.MultipartFile(
-        'image', _imageFile!.readAsBytes().asStream(), _imageFile!.lengthSync(),
-        filename: _imageFile!.path.split('/').last));
+      final firebase_storage.UploadTask uploadTask = ref.putFile(_imageFile!);
+      final firebase_storage.TaskSnapshot snapshot =
+          await uploadTask.whenComplete(() {});
+      final String imageUrl = await snapshot.ref.getDownloadURL();
 
-    request.headers.addAll(headers);
-    request.send();
+      // Send the imageUrl to the admin app using FCM
+      // ...
 
-    final response = await request.send();
-    http.Response res = await http.Response.fromStream(response);
-    final resJson = jsonDecode(res.body);
-    message = resJson['message'];
-    setState(() {});
+      // Show success dialog
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('Success'),
+          content: const Text('Image uploaded successfully!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text('Error'),
+          content: Text('Error uploading image: $e'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -156,12 +152,11 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                     ListTile(
                       leading: Icon(Icons.warning_amber),
                       title: Text(
-                          'Due to memory and dependancy issues, youll have to visit our website to interact with our AI model'),
+                          'Due to dependency limitations, please upload one image at a time. If multiple images, use gmail'),
                     ),
                     ListTile(
                       leading: Icon(Icons.warning_amber),
-                      title: Text(
-                          'The prediction, despite having a 96% accuracy, is based on a machine learning algorithm and is not 100% accurate. Please consult Organix Limited for proper treatment.'),
+                      title: Text('Company email : rayoleeroy@gmail.com'),
                     )
                   ],
                 )),
@@ -242,7 +237,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
             Row(
               children: const [
                 Text(
-                  '2. Upload taken photo to gallery',
+                  '2. Upload taken photo to Agrovet Admin',
                   style: TextStyle(
                       fontSize: 22,
                       fontStyle: FontStyle.italic,
@@ -258,11 +253,19 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
             ElevatedButton(
                 onPressed:
                     //uploadImage,
-                    _saveImageToGallery,
+                    uploadImage,
                 style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: const Color.fromARGB(255, 64, 204, 26)),
-                child: const Text('UPLOAD IMAGE TO GALLERY')),
+                child: const Text('UPLOAD IMAGE ')),
+            const SizedBox(
+              height: 20,
+            ),
+            Divider(
+              height: 1,
+              thickness: 1,
+              color: Colors.grey[300],
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -277,7 +280,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
             Row(
               children: const [
                 Text(
-                  '3. Visit Server for Disease Prediction',
+                  '3. Wait for feedback from Agrovet ',
                   style: TextStyle(
                       fontSize: 22,
                       fontStyle: FontStyle.italic,
@@ -287,17 +290,8 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
               ],
             ),
             const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                onPressed: _launchUrl,
-                style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.redAccent,
-                    backgroundColor: const Color.fromARGB(255, 239, 234, 234)),
-                child: const Text('VISIT SERVER 2 PREDICT')),
-            const SizedBox(
-              height: 20,
-            ),
+              height: 40,
+            )
           ],
         ),
       ),
