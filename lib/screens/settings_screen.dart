@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../data/medicine_data.dart';
+
+import '../data/medicine_firestore.dart';
+import '../models/dawa.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -9,8 +13,13 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('SETTINGS'),
       ),
-      body: const Center(
-        child: Text('App Settings  ...'),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            saveMedicineData(dummyMedicine);
+          },
+          child: const Text('Save Medicine Data'),
+        ),
       ),
     );
   }

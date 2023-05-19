@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -14,6 +15,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmpasswordController =
       TextEditingController();
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
 
   //form
 
@@ -48,6 +51,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
         password: _passwordController.text,
       );
       if (userCredential.user != null) {
+        // User registration successful, save data to Firestore
+        String firstName = _firstNameController.text;
+        String lastName = _lastNameController.text;
+        String email = _emailController.text;
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set({
+          'first_name': firstName,
+          'last_name': lastName,
+          'email': email,
+        });
+
         print('User ${userCredential.user!.uid} registered successfully!');
         Navigator.pushNamed(context, '/login');
       }
@@ -158,6 +175,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
+  //data to firestore
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,6 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Column(
                   children: <Widget>[
                     TextFormField(
+                      controller: _firstNameController,
                       decoration: InputDecoration(
                         hintText: 'First Name : ',
                         prefixIcon: const Icon(Icons.person),
@@ -203,6 +223,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     const SizedBox(height: 30),
                     TextFormField(
+                      controller: _lastNameController,
                       decoration: InputDecoration(
                         hintText: 'Last Name : ',
                         prefixIcon: const Icon(Icons.person),

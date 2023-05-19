@@ -13,8 +13,7 @@ import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:mime_type/mime_type.dart';
-
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+//import 'package:image_gallery_saver/image_gallery_saver.dart';
 
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
