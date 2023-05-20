@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waru_bora_test/screens/chat_screen.dart';
 import 'package:waru_bora_test/screens/location_maps_screen.dart';
 import './diagnosis_screen.dart';
 import './treatment_screen.dart';
@@ -62,6 +63,10 @@ class _TabScreenState extends State<TabScreen> {
     } else if (identifier == 'Settings') {
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const SettingsScreen(),
+      ));
+    } else if (identifier == 'Chat') {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const ChatScreen(),
       ));
     } else {
       Navigator.of(context).pop();

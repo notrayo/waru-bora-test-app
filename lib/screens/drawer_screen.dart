@@ -152,6 +152,27 @@ class DrawerScreen extends StatelessWidget {
               // Navigator.pop(context);
             },
           ),
+          ListTile(
+            leading: const Icon(
+              Icons.chat,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              'Chat',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              //control state
+              onSelectScreenFromDrawer('Chat');
+
+              //close drawer
+              // Navigator.pop(context);
+            },
+          ),
 
           const SizedBox(
             height: 30,
