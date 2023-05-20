@@ -2,7 +2,7 @@
 
 // for type of medicine
 
-enum DawaType { fungiside, insecticide, fertelizer }
+enum DawaType { fungiside, insecticide, fertelizer, nematicide }
 
 class Dawa {
   final String id;

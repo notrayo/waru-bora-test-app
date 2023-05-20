@@ -110,10 +110,10 @@ class _TreatmentScreenState extends State<TreatmentScreen>
               const Padding(
                 padding: EdgeInsets.all(12),
                 child: Text(
-                  'Please pick the diagnosis you got of the potato plant so as to view viable medication:',
+                  'Follow diagnosis instructions guided (emailed to you) by Plant Specialist ',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),

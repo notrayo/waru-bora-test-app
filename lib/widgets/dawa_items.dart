@@ -40,6 +40,11 @@ class DawaItem extends StatelessWidget {
         {
           return 'insecticide';
         }
+      case DawaType.nematicide:
+        {
+          return 'nematicide';
+        }
+
       default:
         return 'Unknown';
     }
@@ -107,7 +112,7 @@ class DawaItem extends StatelessWidget {
                     //SizedBox(
                     //width: 4,
                     //),
-                    const Icon(Icons.category_outlined),
+                    const Icon(Icons.medical_information),
                     const SizedBox(width: 10),
                     Text(dawaTypeText),
                     const SizedBox(width: 10),
