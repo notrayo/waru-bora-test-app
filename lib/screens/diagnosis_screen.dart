@@ -1,21 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-//import 'package:flutter/src/widgets/container.dart';
-//import 'package:flutter/src/widgets/framework.dart';
 import 'package:image_picker/image_picker.dart';
-
-//
-
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-
-import 'package:url_launcher/url_launcher.dart';
-
-import 'package:mime_type/mime_type.dart';
-//import 'package:image_gallery_saver/image_gallery_saver.dart';
-
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DiagnosisScreen extends StatefulWidget {
   const DiagnosisScreen({super.key});
@@ -24,15 +12,8 @@ class DiagnosisScreen extends StatefulWidget {
   State<DiagnosisScreen> createState() => _DiagnosisScreenState();
 }
 
-// popup logic will go here ...
-
 class _DiagnosisScreenState extends State<DiagnosisScreen> {
-  //image file
-
   File? _imageFile;
-
-  //new string file
-  // String? _predictionResult;
 
   Future<void> _getImage(ImageSource source) async {
     final pickedFile = await ImagePicker().pickImage(source: source);
@@ -42,20 +23,6 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
       });
     }
   }
-
-  // Communicating with Flask Backend
-
-  // Taking user to Flask app functionality
-
-  final Uri _url = Uri.parse('https://087c-41-90-179-242.ngrok-free.app/');
-
-  Future<void> _launchUrl() async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
-    }
-  }
-
-  // Uploading Image file to Flask Server
 
   String? message = "";
 
@@ -78,6 +45,10 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
     }
 
     try {
+      final User? user = FirebaseAuth.instance.currentUser;
+      final String userEmail = user!.email!;
+      final DateTime now = DateTime.now();
+
       final firebase_storage.Reference ref = firebase_storage
           .FirebaseStorage.instance
           .ref()
@@ -88,7 +59,13 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
           await uploadTask.whenComplete(() {});
       final String imageUrl = await snapshot.ref.getDownloadURL();
 
-      // Send the imageUrl to the admin app using FCM
+      // Send the image to firestore database
+
+      await FirebaseFirestore.instance.collection('images').add({
+        'email': userEmail,
+        'imageUrl': imageUrl,
+        'timestamp': now,
+      });
       // ...
 
       // Show success dialog
@@ -155,7 +132,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
                     ),
                     ListTile(
                       leading: Icon(Icons.warning_amber),
-                      title: Text('Company email : rayoleeroy@gmail.com'),
+                      title: Text('Company email : mbururyan31@gmail.com'),
                     )
                   ],
                 )),
@@ -173,7 +150,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
             Row(
               children: const [
                 Text(
-                  '1. Take photo of your sick potato leaf',
+                  '1. Take / View photo of sick potato leaf',
                   style: TextStyle(
                       fontSize: 22,
                       fontStyle: FontStyle.italic,
@@ -236,7 +213,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
             Row(
               children: const [
                 Text(
-                  '2. Upload taken photo to Agrovet Admin',
+                  '2. Upload photo to Database',
                   style: TextStyle(
                       fontSize: 22,
                       fontStyle: FontStyle.italic,
@@ -268,24 +245,17 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
             const SizedBox(
               height: 20,
             ),
-            Divider(
-              height: 1,
-              thickness: 1,
-              color: Colors.grey[300],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+
             Row(
               children: const [
                 Text(
-                  '3. Wait for feedback from Agrovet ',
+                  '3. Contact Agrovet Specialist ',
                   style: TextStyle(
                       fontSize: 22,
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 67, 60, 60)),
-                )
+                ),
               ],
             ),
             const SizedBox(
