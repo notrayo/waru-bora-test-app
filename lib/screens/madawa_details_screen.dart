@@ -3,7 +3,7 @@ import 'package:waru_bora_test/data/medicine_data.dart';
 //import '../screens/cart.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:waru_bora_test/screens/cart_screen.dart';
-import '../models/dawa.dart';
+//import '../models/dawa.dart';
 import '../models/cart.dart';
 
 import 'package:provider/provider.dart';

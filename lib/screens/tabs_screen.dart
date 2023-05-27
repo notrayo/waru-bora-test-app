@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:waru_bora_test/screens/cart_screen.dart';
 import 'package:waru_bora_test/screens/chat_screen.dart';
 import 'package:waru_bora_test/screens/location_maps_screen.dart';
 import './diagnosis_screen.dart';
@@ -67,6 +68,10 @@ class _TabScreenState extends State<TabScreen> {
     } else if (identifier == 'Chat') {
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const ChatScreen(),
+      ));
+    } else if (identifier == 'Cart') {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const CartPage(),
       ));
     } else {
       Navigator.of(context).pop();

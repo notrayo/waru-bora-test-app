@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../data/medicine_data.dart';
 
 import '../data/medicine_firestore.dart';
-import '../models/dawa.dart';
+//import '../models/dawa.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

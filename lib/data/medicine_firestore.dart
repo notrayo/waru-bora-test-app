@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
 
-import './medicine_data.dart';
+//import './medicine_data.dart';
 import '../models/dawa.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';

@@ -245,7 +245,6 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
             const SizedBox(
               height: 20,
             ),
-
             Row(
               children: const [
                 Text(

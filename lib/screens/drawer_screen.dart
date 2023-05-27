@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({super.key, required this.onSelectScreenFromDrawer});
@@ -72,7 +73,7 @@ class DrawerScreen extends StatelessWidget {
               color: Colors.black,
             ),
             title: Text(
-              'Favourites',
+              'My Favourites',
               style: Theme.of(context)
                   .textTheme
                   .titleMedium!
@@ -88,12 +89,33 @@ class DrawerScreen extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(
+              Icons.shopping_cart_checkout,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              'My Cart',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              //control state
+              onSelectScreenFromDrawer('Cart');
+
+              //close drawer
+              //Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: const Icon(
               Icons.public,
               size: 30,
               color: Colors.black,
             ),
             title: Text(
-              'Maps API',
+              'Google Maps',
               style: Theme.of(context)
                   .textTheme
                   .titleMedium!
@@ -131,27 +153,7 @@ class DrawerScreen extends StatelessWidget {
               //Navigator.pop(context);
             },
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.settings_outlined,
-              size: 30,
-              color: Colors.black,
-            ),
-            title: Text(
-              'Settings',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: Colors.black),
-            ),
-            onTap: () {
-              //control state
-              onSelectScreenFromDrawer('Settings');
 
-              //close drawer
-              // Navigator.pop(context);
-            },
-          ),
           ListTile(
             leading: const Icon(
               Icons.chat,
@@ -191,6 +193,8 @@ class DrawerScreen extends StatelessWidget {
                   .copyWith(color: Colors.black),
             ),
             onTap: () async {
+              //firebase logout
+              await FirebaseAuth.instance.signOut();
               // Perform logout action here
               SharedPreferences prefs = await SharedPreferences.getInstance();
               await prefs.clear();

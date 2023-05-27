@@ -3,7 +3,7 @@ import 'package:waru_bora_test/screens/login_screen.dart';
 import '/screens/tabs_screen.dart';
 //import '/screens/madawa_screen.dart';
 import 'screens/madawa_details_screen.dart';
-import './screens/checkout_screen.dart';
+//import './screens/checkout_screen.dart';
 //import './data/medicine_data.dart';
 
 //firebase
