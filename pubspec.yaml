@@ -62,6 +62,7 @@ dependencies:
   riverpod_context: ^0.3.0
   firebase_storage: ^11.2.1
   flutter_email_sender: ^5.2.0
+  mpesa: ^2.0.2
   # firebase_core: ^2.10.0
   # firebase_auth: ^3.1.5
 

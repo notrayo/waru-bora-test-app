@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
-
+  final TextEditingController _phoneNumberController = TextEditingController();
   //form
 
   final _formKey = GlobalKey<FormState>();
@@ -55,6 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         String firstName = _firstNameController.text;
         String lastName = _lastNameController.text;
         String email = _emailController.text;
+        String phoneNumber = '+254 ${_phoneNumberController.text}';
 
         await FirebaseFirestore.instance
             .collection('users')
@@ -63,6 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           'first_name': firstName,
           'last_name': lastName,
           'email': email,
+          'phoneNumber': phoneNumber
         });
 
         print('User ${userCredential.user!.uid} registered successfully!');
@@ -263,6 +266,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         }
                         return null;
                       },
+                    ),
+                    const SizedBox(height: 30),
+                    TextFormField(
+                      controller: _phoneNumberController,
+                      decoration: InputDecoration(
+                        hintText: 'Phone Number : ',
+                        prefixText: '+254   ',
+                        prefixIcon: const Icon(Icons.phone),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 2, 63, 113),
+                          ),
+                        ),
+                        hintStyle: const TextStyle(color: Colors.black),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your phone number';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.phone,
                     ),
                     const SizedBox(height: 30),
                     TextFormField(

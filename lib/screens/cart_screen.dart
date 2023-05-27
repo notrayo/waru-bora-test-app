@@ -23,7 +23,7 @@ class _CartPageState extends State<CartPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   late User? currentUser;
-  StreamSubscription<User?>? _authSubscription;
+  //StreamSubscription<User?>? _authSubscription;
 
   // @override
   // void initState() {
@@ -66,6 +66,29 @@ class _CartPageState extends State<CartPage> {
         final itemTitles =
             cart.items.values.map((cartItem) => cartItem.title).join(', ');
 
+        //get info from orders table
+        final String email = user.email!;
+
+        QuerySnapshot<Map<String, dynamic>> querySnapshot =
+            await FirebaseFirestore.instance
+                .collection('users')
+                .where('email', isEqualTo: email)
+                .limit(1)
+                .get();
+
+        String? phoneNumber;
+
+        if (querySnapshot.docs.isNotEmpty) {
+          DocumentSnapshot<Map<String, dynamic>> snapshot =
+              querySnapshot.docs.first;
+
+          phoneNumber = snapshot.get('phoneNumber');
+
+          // Use the retrieved data as needed.
+          //print('First Name: $firstName');
+          //print('Last Name: $lastName');
+          //print('Phone Number: $phoneNumber');
+        }
         // Get the current date and time
         final orderDate = DateTime.now();
 
@@ -75,6 +98,7 @@ class _CartPageState extends State<CartPage> {
           'items': itemTitles,
           'totalPrice': cart.totalPrice,
           'orderDate': orderDate,
+          'phoneNumber': phoneNumber,
         };
 
         try {

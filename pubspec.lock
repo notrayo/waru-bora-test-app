@@ -504,6 +504,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  mpesa:
+    dependency: "direct main"
+    description:
+      name: mpesa
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   nested:
     dependency: transitive
     description:

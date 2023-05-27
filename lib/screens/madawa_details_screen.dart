@@ -8,11 +8,6 @@ import '../models/cart.dart';
 
 import 'package:provider/provider.dart';
 
-//import '../providers/cart_state_notifier.dart';
-//import 'package:flutter_riverpod/flutter_riverpod.dart';
-//import 'package:provider/provider.dart';
-//import 'package:riverpod_context/riverpod_context.dart';
-
 class DawaDetailsScreen extends StatefulWidget {
   static const routeName = '/dawa-detail';
 
@@ -52,34 +47,10 @@ class _DawaDetailsScreenState extends State<DawaDetailsScreen> {
                   );
                 },
                 icon: Stack(
-                  children: [
-                    const Icon(
-                      Icons.shopping_cart,
+                  children: const [
+                    Icon(
+                      Icons.add_shopping_cart_rounded,
                       size: 31,
-                    ),
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: Container(
-                        padding: const EdgeInsets.all(1),
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        constraints: const BoxConstraints(
-                          minWidth: 16,
-                          minHeight: 16,
-                        ),
-                        child: Text(
-                          cart.totalItems.toString(),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
                     ),
                   ],
                 ),

@@ -59,7 +59,7 @@ class _TabScreenState extends State<TabScreen> {
       ));
     } else if (identifier == 'Profile') {
       Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => const ProfileScreen(),
+        builder: (context) => ProfileScreen(),
       ));
     } else if (identifier == 'Settings') {
       Navigator.of(context).push(MaterialPageRoute(
