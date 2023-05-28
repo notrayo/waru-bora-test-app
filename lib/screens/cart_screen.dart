@@ -99,6 +99,7 @@ class _CartPageState extends State<CartPage> {
           'totalPrice': cart.totalPrice,
           'orderDate': orderDate,
           'phoneNumber': phoneNumber,
+          'orderState': false
         };
 
         try {

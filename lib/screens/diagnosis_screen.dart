@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 
 class DiagnosisScreen extends StatefulWidget {
   const DiagnosisScreen({super.key});
@@ -14,6 +15,7 @@ class DiagnosisScreen extends StatefulWidget {
 
 class _DiagnosisScreenState extends State<DiagnosisScreen> {
   File? _imageFile;
+  File? _attachedImageFile;
 
   Future<void> _getImage(ImageSource source) async {
     final pickedFile = await ImagePicker().pickImage(source: source);
@@ -97,6 +99,72 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
         ),
       );
     }
+  }
+
+  //email functionality
+
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _bodyController = TextEditingController();
+
+  List<String> _attachmentPaths = [];
+
+  Future<void> _attachImage() async {
+    final imagePicker = ImagePicker();
+    final pickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _attachmentPaths.add(pickedImage.path);
+      });
+    }
+  }
+
+  Future<void> _sendEmail() async {
+    if (_formKey.currentState!.validate()) {
+      final User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null && user.email != null) {
+        final String senderEmail = user.email!;
+        const String recipientEmail = 'mbururyan31@gmail.com';
+        const String emailSubject = 'Waru Bora Farmer Diagnosis Request';
+        final String emailBody =
+            'Farmer app authenticated Email: $senderEmail\n\n${_bodyController.text}';
+
+        final Email email = Email(
+          body: emailBody,
+          subject: emailSubject,
+          recipients: [recipientEmail],
+          cc: [],
+          bcc: [],
+          attachmentPaths: _attachmentPaths,
+          isHTML: false,
+        );
+
+        try {
+          await FlutterEmailSender.send(email);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Email sent successfully')),
+          );
+        } catch (error) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Failed to send email')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('User not logged in or no email address')),
+        );
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _bodyController.dispose();
+    super.dispose();
   }
 
   @override
@@ -259,6 +327,41 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
             ),
             const SizedBox(
               height: 40,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    TextFormField(
+                      controller: _bodyController,
+                      maxLines: null,
+                      keyboardType: TextInputType.multiline,
+                      decoration: const InputDecoration(
+                        labelText: 'Email Body',
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter the email body';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 16.0),
+                    ElevatedButton(
+                      onPressed: _attachImage,
+                      child: const Text('Attach Image'),
+                    ),
+                    const SizedBox(height: 16.0),
+                    ElevatedButton(
+                      onPressed: _sendEmail,
+                      child: const Text('Send Email'),
+                    ),
+                  ],
+                ),
+              ),
             )
           ],
         ),
