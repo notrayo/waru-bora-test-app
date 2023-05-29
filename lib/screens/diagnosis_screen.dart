@@ -15,7 +15,7 @@ class DiagnosisScreen extends StatefulWidget {
 
 class _DiagnosisScreenState extends State<DiagnosisScreen> {
   File? _imageFile;
-  File? _attachedImageFile;
+  //File? _attachedImageFile;
 
   Future<void> _getImage(ImageSource source) async {
     final pickedFile = await ImagePicker().pickImage(source: source);
@@ -107,7 +107,7 @@ class _DiagnosisScreenState extends State<DiagnosisScreen> {
   final _emailController = TextEditingController();
   final _bodyController = TextEditingController();
 
-  List<String> _attachmentPaths = [];
+  final List<String> _attachmentPaths = [];
 
   Future<void> _attachImage() async {
     final imagePicker = ImagePicker();

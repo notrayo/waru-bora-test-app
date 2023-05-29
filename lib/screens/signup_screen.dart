@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import '../models/counties.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -22,6 +23,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   //form
 
   final _formKey = GlobalKey<FormState>();
+
+  //counties dropdown
+  String? selectedCounty;
 
   Future<void> _registerUser() async {
     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
@@ -57,6 +61,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         String lastName = _lastNameController.text;
         String email = _emailController.text;
         String phoneNumber = '+254 ${_phoneNumberController.text}';
+        String county = selectedCounty ?? '';
 
         await FirebaseFirestore.instance
             .collection('users')
@@ -65,7 +70,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           'first_name': firstName,
           'last_name': lastName,
           'email': email,
-          'phoneNumber': phoneNumber
+          'phoneNumber': phoneNumber,
+          'county': county
         });
 
         print('User ${userCredential.user!.uid} registered successfully!');
@@ -263,6 +269,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         }
                         if (!value.contains('@')) {
                           return 'Please enter a valid email';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 30),
+                    //counties
+                    DropdownButtonFormField<String>(
+                      value: selectedCounty,
+                      decoration: InputDecoration(
+                        hintText: 'County',
+                        prefixIcon: const Icon(Icons.location_on),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 2, 63, 113)),
+                        ),
+                        hintStyle: const TextStyle(color: Colors.black),
+                      ),
+                      items: counties.map((String county) {
+                        return DropdownMenuItem<String>(
+                          value: county,
+                          child: Text(county),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedCounty = newValue;
+                        });
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please select your county';
                         }
                         return null;
                       },
