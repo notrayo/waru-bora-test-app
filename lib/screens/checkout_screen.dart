@@ -124,7 +124,7 @@ class CheckoutPage extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 15,
+              height: 25,
             ),
             InkWell(
               onTap: () async {
@@ -139,8 +139,8 @@ class CheckoutPage extends StatelessWidget {
                 //   throw 'cannot launch phone dialer';
                 // }
 
-                final phoneNumber = '0791266895';
-                final url = 'tel:$phoneNumber';
+                const phoneNumber = '0791266895';
+                const url = 'tel:$phoneNumber';
 
                 launch(url);
 
@@ -270,9 +270,9 @@ class CheckoutPage extends StatelessWidget {
                   '  PLEASE PAY BEFORE COMPLETING ...',
                   style: TextStyle(
                       fontSize: 20,
-                      fontStyle: FontStyle.normal,
+                      fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 34, 33, 33)),
+                      color: Color.fromARGB(255, 4, 56, 7)),
                 )
               ],
             ),
