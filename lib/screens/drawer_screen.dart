@@ -50,7 +50,7 @@ class DrawerScreen extends StatelessWidget {
               color: Colors.black,
             ),
             title: Text(
-              'Home',
+              'Home Page',
               style: Theme.of(context)
                   .textTheme
                   .titleMedium!
@@ -68,7 +68,7 @@ class DrawerScreen extends StatelessWidget {
 
           ListTile(
             leading: const Icon(
-              Icons.star,
+              Icons.stars,
               size: 30,
               color: Colors.black,
             ),
@@ -108,6 +108,29 @@ class DrawerScreen extends StatelessWidget {
               //Navigator.pop(context);
             },
           ),
+
+          ListTile(
+            leading: const Icon(
+              Icons.person_outline,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              ' My Profile',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              //control state
+              onSelectScreenFromDrawer('Profile');
+
+              //close drawer
+              //Navigator.pop(context);
+            },
+          ),
+
           ListTile(
             leading: const Icon(
               Icons.public,
@@ -115,7 +138,7 @@ class DrawerScreen extends StatelessWidget {
               color: Colors.black,
             ),
             title: Text(
-              'Google Maps',
+              'Locate Us',
               style: Theme.of(context)
                   .textTheme
                   .titleMedium!
@@ -134,34 +157,12 @@ class DrawerScreen extends StatelessWidget {
 
           ListTile(
             leading: const Icon(
-              Icons.person_outline,
-              size: 30,
-              color: Colors.black,
-            ),
-            title: Text(
-              'Profile',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: Colors.black),
-            ),
-            onTap: () {
-              //control state
-              onSelectScreenFromDrawer('Profile');
-
-              //close drawer
-              //Navigator.pop(context);
-            },
-          ),
-
-          ListTile(
-            leading: const Icon(
               Icons.chat,
               size: 30,
               color: Colors.black,
             ),
             title: Text(
-              'Chat',
+              'Contact Us!',
               style: Theme.of(context)
                   .textTheme
                   .titleMedium!
@@ -173,6 +174,28 @@ class DrawerScreen extends StatelessWidget {
 
               //close drawer
               // Navigator.pop(context);
+            },
+          ),
+
+          ListTile(
+            leading: const Icon(
+              Icons.star_half_sharp,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              ' Rate Us !',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              //control state
+              onSelectScreenFromDrawer('Ratings');
+
+              //close drawer
+              //Navigator.pop(context);
             },
           ),
 

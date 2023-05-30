@@ -57,9 +57,12 @@ class _RatingsScreenState extends State<RatingsScreen> {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             for (int i = 1; i <= 5; i++)
               IconButton(
-                icon: Icon(
-                  i <= rating ? Icons.star : Icons.star_border,
-                  color: const Color.fromARGB(255, 225, 152, 43),
+                icon: Transform.scale(
+                  scale: 1.5,
+                  child: Icon(
+                    i <= rating ? Icons.star : Icons.star_border,
+                    color: const Color.fromARGB(255, 225, 152, 43),
+                  ),
                 ),
                 onPressed: () {
                   setState(() {
@@ -68,12 +71,15 @@ class _RatingsScreenState extends State<RatingsScreen> {
                 },
               ),
           ]),
+          const SizedBox(
+            height: 25,
+          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: commentController,
               decoration: const InputDecoration(
-                labelText: 'Add a comment (optional)',
+                labelText: 'Add a comment ... (optional)',
               ),
               onChanged: (value) {
                 setState(() {
@@ -81,6 +87,9 @@ class _RatingsScreenState extends State<RatingsScreen> {
                 });
               },
             ),
+          ),
+          const SizedBox(
+            height: 20,
           ),
           ElevatedButton(
             onPressed: () {
