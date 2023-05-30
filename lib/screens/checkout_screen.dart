@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:waru_bora_test/screens/ratings_screen.dart';
 //import 'package:waru_bora_test/screens/home_screen.dart';
-import 'package:waru_bora_test/screens/tabs_screen.dart';
+//import 'package:waru_bora_test/screens/tabs_screen.dart';
 import '../models/cart.dart';
 import 'package:provider/provider.dart';
 
@@ -287,7 +288,7 @@ class CheckoutPage extends StatelessWidget {
           //saveOrder();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const TabScreen()),
+            MaterialPageRoute(builder: (context) => const RatingsScreen()),
           );
         },
         child: Container(
