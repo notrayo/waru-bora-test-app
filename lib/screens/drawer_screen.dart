@@ -111,6 +111,28 @@ class DrawerScreen extends StatelessWidget {
 
           ListTile(
             leading: const Icon(
+              Icons.shopping_bag_outlined,
+              size: 30,
+              color: Colors.black,
+            ),
+            title: Text(
+              'Placed Orders',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              //control state
+              onSelectScreenFromDrawer('Orders');
+
+              //close drawer
+              //Navigator.pop(context);
+            },
+          ),
+
+          ListTile(
+            leading: const Icon(
               Icons.person_outline,
               size: 30,
               color: Colors.black,
@@ -128,28 +150,6 @@ class DrawerScreen extends StatelessWidget {
 
               //close drawer
               //Navigator.pop(context);
-            },
-          ),
-
-          ListTile(
-            leading: const Icon(
-              Icons.public,
-              size: 30,
-              color: Colors.black,
-            ),
-            title: Text(
-              'Locate Us',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium!
-                  .copyWith(color: Colors.black),
-            ),
-            onTap: () {
-              //control state
-              onSelectScreenFromDrawer('Maps Location');
-
-              //close drawer
-              // Navigator.pop(context);
             },
           ),
 

@@ -8,6 +8,8 @@ import 'package:flutter_email_sender/flutter_email_sender.dart';
 //import 'package:image_picker/image_picker.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import './location_maps_screen.dart';
+
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
 
@@ -203,6 +205,83 @@ class _ChatScreenState extends State<ChatScreen> {
                     const SizedBox(width: 10.0),
                     const Icon(
                       Icons.call,
+                      size: 35,
+                      color: Colors.green,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Divider(
+              height: 1,
+              thickness: 0.5,
+              color: Colors.grey[300],
+            ),
+            const SizedBox(
+              height: 35,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: const [
+                Text(
+                  'Locate Us : ',
+                  style: TextStyle(
+                    fontSize: 21,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 69, 69, 69),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MapsScreen()));
+              },
+              child: Container(
+                padding: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 0.5,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Google',
+                          style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                        Text(
+                          'Maps',
+                          style: TextStyle(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 10.0),
+                    const Icon(
+                      Icons.location_on_sharp,
                       size: 35,
                       color: Colors.green,
                     )

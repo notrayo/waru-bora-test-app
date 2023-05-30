@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:waru_bora_test/screens/cart_screen.dart';
 import 'package:waru_bora_test/screens/chat_screen.dart';
 import 'package:waru_bora_test/screens/location_maps_screen.dart';
+import 'package:waru_bora_test/screens/placed_orders.dart';
 import './diagnosis_screen.dart';
 import './treatment_screen.dart';
 import './home_screen.dart';
@@ -77,6 +78,10 @@ class _TabScreenState extends State<TabScreen> {
     } else if (identifier == 'Ratings') {
       Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => const RatingsScreen(),
+      ));
+    } else if (identifier == 'Orders') {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => const OrdersScreen(),
       ));
     } else {
       Navigator.of(context).pop();
