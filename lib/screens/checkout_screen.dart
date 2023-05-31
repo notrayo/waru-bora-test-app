@@ -13,6 +13,17 @@ import 'package:url_launcher/url_launcher.dart';
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({Key? key}) : super(key: key);
 
+  void openGoogleMaps() async {
+    const url =
+        'https://www.google.com/maps/dir/?api=1&destination=-1.2499801,36.6749099';
+    // Replace 'latitude' and 'longitude' with the actual coordinates of the destination
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
@@ -73,12 +84,12 @@ class CheckoutPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: const [
                     Text(
-                      'BUY GOODS TILL NO  : 37092057',
+                      'BUY GOODS TILL NO  : 838 876',
                       style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(height: 18),
                     Text(
-                      'TILL NAME  : ORGANIX LMTD KIAMBU',
+                      'TILL NAME  : ORGANIX LMTD KIKUYU',
                       style: TextStyle(fontSize: 18),
                     ),
                   ],
@@ -166,7 +177,7 @@ class CheckoutPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '0791 266 895',
+                          '0736 190 951',
                           style: TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
@@ -192,7 +203,7 @@ class CheckoutPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: const [
                 Text(
-                  'Locate Us : ',
+                  'Maps Direction : ',
                   style: TextStyle(
                     fontSize: 21,
                     fontWeight: FontWeight.bold,
@@ -206,10 +217,7 @@ class CheckoutPage extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MapsScreen()));
+                openGoogleMaps();
               },
               child: Container(
                 padding: const EdgeInsets.all(16.0),

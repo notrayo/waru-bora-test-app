@@ -67,6 +67,17 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  void openGoogleMaps() async {
+    const url =
+        'https://www.google.com/maps/dir/?api=1&destination=-1.2499801,36.6749099';
+    // Replace 'latitude' and 'longitude' with the actual coordinates of the destination
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -241,10 +252,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             InkWell(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MapsScreen()));
+                openGoogleMaps();
               },
               child: Container(
                 padding: const EdgeInsets.all(16.0),
