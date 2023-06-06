@@ -1,16 +1,13 @@
-# waru_bora_test
+# Waru Bora
 
-A new Flutter project.
+A flutter Mobile Application, that allows farmers to diagnose sick potato plants, using a Neural Network model. It was done as my 4th Year Computer Science project
 
-## Getting Started
+The application, offers alot of features including : 
+- Firebase Authentication
+- Image Upload
+- Email comms
+- M-commerce (medicine inventory, cart feature, checkout feature)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
